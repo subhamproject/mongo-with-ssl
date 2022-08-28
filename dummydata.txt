@@ -1,0 +1,1 @@
+wget https://s3.amazonaws.com/edu-downloads.10gen.com/M121_2017_October/static/handouts/chapter_4_core_aggregation_multidimensional_grouping.zip

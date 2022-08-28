@@ -1,0 +1,15 @@
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = mongo1
+DNS.2 = mongo2
+DNS.3 = mongo3
+DNS.4 = mongo4
+DNS.5 = mongo5
+DNS.6 = mongo6
+DNS.7 = localhost
+DNS.8 = 127.0.0.1

@@ -1,0 +1,24 @@
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+default_keyfile = mongo-client.key
+prompt = no
+
+[req_distinguished_name]
+countryName             = IN
+stateOrProvinceName     = Telangana
+localityName            = Hyderabad
+organizationName        = DevopsForAll
+commonName              = mongo1
+
+[v3_req]
+keyUsage = keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = mongo1
+DNS.2 = mongo2
+DNS.3 = mongo3
+DNS.3 = localhost
+DNS.3 = 127.0.0.1

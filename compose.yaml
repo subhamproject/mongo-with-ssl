@@ -1,0 +1,53 @@
+version: '3'
+services:
+    mongo1:
+        hostname: mongo1
+        container_name: mongo1
+        image: mongo:4.0.4
+        environment:
+          ROLE: master
+          SLAVE1: mongo2
+          SLAVE2: mongo3
+        expose:
+            - 27017
+        ports:
+            - 27011:27017
+        restart: always
+        volumes:
+            - "/root/mongo-ssl/mongo1.pem:/data/mongo1.pem:ro"
+            - "/root/mongo-ssl/mongoCA.crt:/data/mongoCA.crt:ro"
+            - "/usr/local/mongo-volume1:/data/db"
+        entrypoint: ['/usr/bin/mongod', '--replSet', 'rs0', '--sslMode', 'requireSSL', '--clusterAuthMode', 'x509', '--sslClusterFile', '/data/mongo1.pem', '--sslPEMKeyFile', '/data/mongo1.pem', '--sslCAFile', '/data/mongoCA.crt', '--bind_ip_all']
+    mongo2:
+        hostname: mongo2
+        container_name: mongo2
+        image: mongo:4.0.4
+        environment:
+          ROLE: slave
+        expose:
+            - 27017
+        ports:
+            - 27012:27017
+        restart: always
+        volumes:
+            - "/root/mongo-ssl/mongo2.pem:/data/mongo2.pem:ro"
+            - "/root/mongo-ssl/mongoCA.crt:/data/mongoCA.crt:ro"
+            - "/usr/local/mongo-volume2:/data/db"
+        entrypoint: ['/usr/bin/mongod', '--replSet', 'rs0', '--sslMode', 'requireSSL', '--clusterAuthMode', 'x509', '--sslClusterFile', '/data/mongo2.pem', '--sslPEMKeyFile', '/data/mongo2.pem', '--sslCAFile', '/data/mongoCA.crt', '--bind_ip_all']
+
+    mongo3:
+        hostname: mongo3
+        container_name: mongo3
+        image: mongo:4.0.4
+        environment:
+          ROLE: slave
+        expose:
+            - 27017
+        ports:
+            - 27013:27017
+        restart: always
+        volumes:
+            - "/root/mongo-ssl/mongo3.pem:/data/mongo3.pem:ro"
+            - "/root/mongo-ssl/mongoCA.crt:/data/mongoCA.crt:ro"
+            - "/usr/local/mongo-volume3:/data/db"
+        entrypoint: ['/usr/bin/mongod', '--replSet', 'rs0', '--sslMode', 'requireSSL', '--clusterAuthMode', 'x509', '--sslClusterFile', '/data/mongo3.pem', '--sslPEMKeyFile', '/data/mongo3.pem', '--sslCAFile', '/data/mongoCA.crt', '--bind_ip_all']

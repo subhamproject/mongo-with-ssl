@@ -1,0 +1,17 @@
+[req]
+default_bit = 2048
+distinguished_name = req_distinguished_name
+x509_extensions = v3_ca
+prompt = no
+
+[req_distinguished_name]
+countryName             = IN
+stateOrProvinceName     = Telangana
+localityName            = Hyderabad
+organizationName        = DevopsForAll
+commonName              = Mongo CA
+
+[ v3_ca ]
+basicConstraints=critical,CA:TRUE
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer

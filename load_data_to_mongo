@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+       echo "Usage load <name> [--drop]"
+       exit 1;
+fi
+   
+VOL=/root/mongo-ssl
+CMDTORUN="--ssl --sslPEMKeyFile=/certs/mongo-client.pem --sslCAFile=/certs/mongoCA.crt -u test -p test -h mongo1 -d test $1 $2 $3 $4"
+
+docker run -it --rm -v $VOL:/certs --network mongo-ssl_default --entrypoint /usr/bin/mongoimport  mongo:4.0.4 $CMDTORUN
+

@@ -1,0 +1,5 @@
+# Use docker rcx-api image to run mongo shell commands
+   
+VOL=/root/mongo-ssl
+CMDTORUN=" --ssl --sslPEMKeyFile=/certs/mongo-client.pem --sslCAFile=/certs/mongoCA.crt -u test -p test mongo1/test $*"
+docker run -it --rm -v $VOL:/certs --network mongo-ssl_default --entrypoint /usr/bin/mongo  mongo:4.0.4 $CMDTORUN

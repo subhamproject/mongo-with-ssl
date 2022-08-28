@@ -1,0 +1,56 @@
+version: '3'
+services:
+    mongo1:
+        hostname: mongo1
+        container_name: mongo1
+        build: build/
+        image: mongo-own
+        environment:
+          ROLE: master
+          SLAVE1: mongo2
+          SLAVE2: mongo3
+        expose:
+            - 27017
+        ports:
+            - 27011:27017
+        restart: always
+        depends_on:
+           - mongo2
+           - mongo3
+        links:
+           - mongo2
+           - mongo3
+        volumes:
+            - "/root/mongo-ssl/:/certs:ro"
+
+
+    mongo2:
+        hostname: mongo2
+        container_name: mongo2
+        build: build/
+        image: mongo-own
+        environment:
+          ROLE: slave
+        expose:
+            - 27017
+        ports:
+            - 27012:27017
+        restart: always
+        volumes:
+            - "/root/mongo-ssl/:/certs:ro"
+
+
+    mongo3:
+        hostname: mongo3
+        container_name: mongo3
+        build: build/
+        image: mongo-own
+        environment:
+          ROLE: slave
+        expose:
+            - 27017
+        ports:
+            - 27013:27017
+        restart: always
+        volumes:
+            - "/root/mongo-ssl/:/certs:ro"
