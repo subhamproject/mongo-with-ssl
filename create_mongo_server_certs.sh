@@ -1,5 +1,26 @@
 #!/bin/bash
 
+function log() {
+    echo "$1" >&2
+}
+
+function die() {
+    log "$1"
+    exit 1
+}
+
+function check_exist() {
+    [ ! -z "$(command -v java)" ] || die "The 'java' command is missing - Please install"
+    [ ! -z "$(command -v openssl)" ] || die "The the 'openssl' command is missing - Please install"
+    [ ! -z "$(command -v keytool)" ] || die "The the 'keytool' command is missing - Please install"
+    [ ! -z "$(command -v docker)" ] || die "The the 'docker' command is missing - Please install"
+    [ ! -z "$(command -v docker-compose)" ] || die "The the 'docker-compose' command is missing - Please install"
+}
+
+
+check_exist
+
+
 PATH="."
 
 function server_cert() {
