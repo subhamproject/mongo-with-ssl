@@ -1,0 +1,13 @@
+#!/bin/bash
+
+VOL=/home/vagrant/mongo-with-ssl
+
+for coll in *; do
+    if [ -d "${coll}" ] ; then
+        echo "$coll"
+        for file in $coll/*; do
+            CMDTORUN="--ssl --sslPEMKeyFile=/certs/mongo-client.pem --sslCAFile=/certs/mongoCA.crt -u test -p test -h mongo1 -d admin  --collection subham --file /tmp/$file $1 $2 $3 $4"
+            docker run -it --rm -v $VOL:/certs -v ${PWD}:/tmp -w /tmp --network mongo_default --entrypoint /usr/bin/mongoimport  mongo:4.0.4 $CMDTORUN
+        done
+    fi
+done

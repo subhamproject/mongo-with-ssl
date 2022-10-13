@@ -1,0 +1,8 @@
+https://www.mongodb.com/developer/products/mongodb/cheat-sheet/
+
+https://www.mysoftkey.com/mongodb/mongodb-admin-cheat-sheet/
+
+https://gist.github.com/michaeltreat/d3bdc989b54cff969df86484e091fd0c
+
+
+https://www.opentechguides.com/how-to/article/mongodb/118/mongodb-cheatsheat.html
